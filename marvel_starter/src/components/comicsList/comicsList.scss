@@ -1,6 +1,49 @@
 .comics {
+    &__banner{
+        width: 1100px;
+        height: 100px;
+        background: #232222;
+        margin-bottom: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color:#ffff;
+        gap: 70px;
+    }
     &__list {
         margin-top: 45px;
+        .button-up {
+          position: absolute;
+          background: #c0c0c0;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          transition: all 0.2s linear;
+          left: 1000px;
+          border:1px solid #fff;
+        }
+
+        .button-up:hover {
+          transform: translate3d(0, -10px, 0);
+          cursor: pointer;
+        }
+        
+        .button-up::after {
+          content: "";
+          position: absolute;
+          left: 11px;
+          z-index: 11;
+          display: block;
+          width: 25px;
+          height: 25px;
+          border-top: 2px solid #fff;
+          border-left: 2px solid #fff;
+        }
+        
+        .button-up::after {
+            top: 20px;
+            transform: rotate(45deg);
+          }
     }
     &__grid {
         display: grid;
@@ -32,5 +75,5 @@
         &:hover {
             transform: translateY(-5px);
         }
-    }
+    }   
 }
