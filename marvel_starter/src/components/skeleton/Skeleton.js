@@ -1,7 +1,6 @@
 import './skeleton.scss';
 
 const Skeleton = () => {
-    const bober = 0;
     return (
         <>
             <p className="char__select">Please select a character to see information</p>
