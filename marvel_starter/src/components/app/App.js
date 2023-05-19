@@ -6,6 +6,8 @@ import AppHeader from "../appHeader/AppHeader";
 
 const App = () => {
 
+    const bober = 0;
+
         return (
             <Router>
                 <div className="app">
