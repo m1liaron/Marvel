@@ -5,6 +5,8 @@ import AppHeader from "../appHeader/AppHeader";
 
 
 const App = () => {
+
+    const bob = 'a';
         return (
             <Router>
                 <div className="app">
