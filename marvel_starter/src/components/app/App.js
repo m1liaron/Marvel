@@ -5,7 +5,7 @@ import AppHeader from "../appHeader/AppHeader";
 
 
 const App = () => {
-
+const bob=0;
         return (
             <Router basename={process.env.PUBLIC_URL}>
                 <div className="app">
