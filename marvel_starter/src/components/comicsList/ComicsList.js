@@ -1,13 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 import './comicsList.scss';
 
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
-import uw from '../../resources/img/UW.png';
-import xMen from '../../resources/img/x-men.png';
-import Avengers_logo from '../../resources/img/Avengers_logo.png';
-import Avengers from '../../resources/img/Avengers.png';
 import useMarvelService from '../../services/MarvelService';
 
 const ComicsList = (props) => {
@@ -45,7 +42,6 @@ const ComicsList = (props) => {
         const [isVisible, setIsVisible] = useState(false);
       
         useEffect(() => {
-          // Add scroll event listener to check if the button should be visible
           window.addEventListener('scroll', handleScroll);
           return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -53,7 +49,6 @@ const ComicsList = (props) => {
         }, []);
       
         const handleScroll = () => {
-          // Check the scroll position and update the visibility of the button
           if (window.pageYOffset > 100) {
             setIsVisible(true);
           } else {
@@ -62,7 +57,6 @@ const ComicsList = (props) => {
         };
       
         const scrollToTop = () => {
-          // Scroll to the top of the page when the button is clicked
           window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -78,19 +72,19 @@ const ComicsList = (props) => {
       };
 
     function renderItems(id){
-        const comics = id.map((item) => {
+        const comics = id.map((item,i) => {
             let imgStyle = {'objectFit' : 'cover'};
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = {'objectFit' : 'unset'};
             }
 
             return (
-                <li className="comics__item">
-                    <a href="#">
+                <li className="comics__item" key={i}>
+                    <Link to={`/comics/${item.id}`}>
                         <img src={item.thumbnail} alt="ultimate war" style={imgStyle} className="comics__item-img"/>
                         <div className="comics__item-name">{item.title}</div>
                         <div className="comics__item-price">{item.price}</div>
-                    </a>
+                    </Link>
                 </li>
             )
         })
@@ -100,37 +94,29 @@ const ComicsList = (props) => {
             </ul>
         )
     }
-const btn =             <button 
-                        disabled={newItemLoading} 
-                        style={{'display' : comicsEnded ? 'block' : 'none'}}
-                        className="button button__main button__long"
-                        onClick={() => onRequest(offset)}>
-                        <div className="inner">load more</div>
-                        </button>
+const btn = <button   
+            disabled={newItemLoading} 
+            style={{'display' : comicsEnded ? 'block' : 'none'}}
+            className="button button__main button__long"
+            onClick={() => onRequest(offset)}>
+            <div className="inner">load more</div>
+            </button>
+
     const items = renderItems(comicsList);
 
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading && !newItemLoading ? <Spinner/> : null;
     const addNewItems = newItemLoading ? <Spinner/> : btn;
+    const scrollUpBtn = loading ? null : <ScrollUpButton/>;
 
     return (
         <div className="comics__list">
-            {/* <div className="comics__banner">
-                <img src={Avengers} alt="Avengers" />
-                <h1>New comics every week! Stay tuned!</h1>
-                <img src={Avengers_logo} alt="Avengers_logo" />
-            </div> */}
                 {errorMessage}
                 {spinner}
                 {items}
                 {addNewItems}   
-                <ScrollUpButton />
+                {scrollUpBtn}
         </div>
     )
 }
-
-ComicsList.propTypes = {
-    onComicsSelected: PropTypes.func.isRequired
-}
-
 export default ComicsList;
