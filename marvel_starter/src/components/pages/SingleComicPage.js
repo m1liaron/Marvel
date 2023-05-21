@@ -45,7 +45,7 @@ const View = ({comic}) => {
 
     return (
         <div className="single-comic">
-            <img src={thumbnail} alt={title} className="single-comic__img"/>
+            <Link to={`https://www.google.com/search?q=${(title)}`}><img src={thumbnail} alt={title} className="single-comic__img"/></Link>
             <div className="single-comic__info">
                 <h2 className="single-comic__name">{title}</h2>
                 <p className="single-comic__descr">{description}</p>
