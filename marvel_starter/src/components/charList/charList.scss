@@ -22,6 +22,20 @@
         padding: 15px;
         cursor: pointer;
         transition: 0.3s transform;
+      &__-enter {
+      opacity: 0;
+      }
+      &__-active {
+        opacity: 1;
+        transition: opacity 200ms;
+      }
+      &__-exit {
+        opacity: 1;
+      }
+      &__-active {
+        opacity: 0;
+        transition: opacity 200ms;
+      }
         img {
             width: 200px;
             height: 200px;
@@ -32,6 +46,21 @@
             box-shadow: 0 5px 20px $main-color;
             transform: translateY(-8px);
         }
+        &-enter {
+            opacity: 0;
+        }
+        &-enter-active {
+            opacity: 1;
+            transition: opacity 500ms ease-in;
+            filter: blur(4px);
+        }
+        &-exit {
+            opacity: 1;
+        }
+        &-exit-active {
+            opacity: 0;
+            transition: opacity 500ms ease-in;
+        }
     }
     &__name {
         font-weight: bold;
@@ -39,5 +68,5 @@
         line-height: 29px;
         text-transform: uppercase;
         color: #fff;
-    }
+    } 
 }

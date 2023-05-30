@@ -1,5 +1,6 @@
 import React,{ useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
@@ -12,6 +13,8 @@ const CharList = (props) => {
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
+    const [inProp, setInProp] = useState(true);
+    const nodeRef = useRef(null);
 
     const {loading, error, getAllCharacters} = useMarvelService(); 
 
@@ -49,6 +52,8 @@ const CharList = (props) => {
         itemRefs.current[id].classList.add('char__item_selected');
         itemRefs.current[id].focus();
     }
+    
+    const duration = 300;
 
    function renderItems(id){
         const items = id.map((item,i) => {
@@ -57,7 +62,9 @@ const CharList = (props) => {
                 imgStyle = {'objectFit' : 'unset'};
             }
             return (
-                <li 
+                <CSSTransition key={item.id} timeout={500} classNames="char__item"
+                    >
+                    <li  
                     className="char__item"
                     key={item.id}
                     ref={el => itemRefs.current[i] = el}
@@ -72,14 +79,17 @@ const CharList = (props) => {
                         }
                     }}
                     >
-                        <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
-                        <div className="char__name">{item.name}</div>
+                    <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
+                    <div className="char__name">{item.name}</div>
                 </li>
+                </CSSTransition>
             )
         });
         return (
             <ul className="char__grid">
-                {items}
+                <TransitionGroup component={null}>
+                    {items}
+                </TransitionGroup>
             </ul>
         ) 
     }
