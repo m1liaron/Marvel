@@ -1,3 +1,7 @@
 # Marvel 
 ## Цей сайт створений для перегляду персонажів та їх історії.
-### <img src="./public/Characters.png">
+### <img src="./marvel_starter/public/Characters.png">
+##
+##
+##
+
